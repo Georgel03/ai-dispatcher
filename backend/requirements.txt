@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+sqlalchemy          # Pentru baza de date
+psycopg2-binary     # Driver PostgreSQL
+geoalchemy2         # Pentru date geografice (GPS)
+ortools             # Google OR-Tools (Optimizarea)
+clerk-backend-api
+svix
+python-dotenv
+requests
+python-jose[cryptography] # Pentru generarea JWT
+passlib[bcrypt] # Pentru criptarea parolelor
+python-multipart # Pentru formularul de login
+pydantic>=2.0.0
+pydantic-settings
+cryptography
