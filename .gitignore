@@ -1,7 +1,7 @@
 # --- GLOBAL ---
 .DS_Store
 *.log
-sivx.exe
+svix.exe
 .env
 
 
