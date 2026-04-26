@@ -2,22 +2,56 @@ import { Box } from 'lucide-react';
 
 export default function TrustedBy() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-32 bg-white border-t border-slate-100">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
           <div>
-            <h2 className="text-2xl font-bold text-slate-900 mb-3">Trusted by company</h2>
-            <p className="text-[10px] text-slate-500 leading-relaxed max-w-xs">
-              Discover Why PrecisionTrack is the Trusted Choice for Leading Companies in the Trucking Industry
+            <h2 className="text-4xl font-extrabold text-slate-900 mb-6">Trusted by Industry Leaders</h2>
+            <p className="text-lg text-slate-600 leading-relaxed max-w-md">
+              Discover Why Tracker is the Trusted Choice for Leading Companies in the Logistics and Trucking Industry.
             </p>
           </div>
-          <div className="grid grid-cols-3 gap-y-10 gap-x-8 opacity-40 grayscale">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/FedEx_Express.svg/1200px-FedEx_Express.svg.png" className="h-6 object-contain" alt="FedEx" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Aramex_logo.svg/2560px-Aramex_logo.svg.png" className="h-5 object-contain" alt="Aramex" />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/DB_Schenker_Logo.svg/1200px-DB_Schenker_Logo.svg.png" className="h-6 object-contain" alt="DB Schenker" />
-            <div className="flex items-center gap-1 font-bold text-slate-800 text-lg"><Box className="w-5 h-5" /> ShipBob</div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/DHL_Logo.svg/2560px-DHL_Logo.svg.png" className="h-4 object-contain mt-1" alt="DHL" />
-            <div className="flex items-center gap-1 font-bold text-slate-800 text-lg tracking-tighter">TNT</div>
+          
+          
+          <div className="grid grid-cols-3 gap-y-14 gap-x-12 items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+          
+            <svg viewBox="0 0 120 35" className="h-8 w-auto">
+              <text x="0" y="28" fontFamily="Arial, Helvetica, sans-serif" fontSize="32" fontWeight="900" letterSpacing="-1.5">
+                <tspan fill="#4d148c">Fed</tspan><tspan fill="#ff6600">Ex</tspan>
+              </text>
+            </svg>
+            
+           
+            <svg viewBox="0 0 120 35" className="h-5 w-auto">
+              <text x="0" y="26" fontFamily="Arial, Helvetica, sans-serif" fontSize="28" fontWeight="900" fill="#e2001a" letterSpacing="-1">aramex</text>
+            </svg>
+            
+            
+            <svg viewBox="0 0 180 35" className="h-5 w-auto">
+              <text x="0" y="26" fontFamily="Arial, Helvetica, sans-serif" fontSize="22" fontWeight="800" fill="#000000">DB SCHENKER</text>
+            </svg>
+            
+            
+            <div className="flex items-center gap-2 font-extrabold text-slate-900 text-xl">
+              <Box className="w-7 h-7 text-blue-600" /> ShipBob
+            </div>
+            
+            
+            <svg viewBox="0 0 120 35" className="h-6 w-auto">
+              <rect width="120" height="35" fill="#ffcc00" />
+              <text x="18" y="26" fontFamily="Arial, Helvetica, sans-serif" fontSize="24" fontStyle="italic" fontWeight="900" fill="#d40511" letterSpacing="-1">DHL</text>
+            </svg>
+            
+           
+            <svg viewBox="0 0 120 35" className="h-7 w-auto">
+              <circle cx="18" cy="18" r="16" fill="#ff6600"/>
+              <text x="18" y="24" fontFamily="Arial, Helvetica, sans-serif" fontSize="20" fontWeight="900" fill="#ffffff" textAnchor="middle">T</text>
+              <circle cx="56" cy="18" r="16" fill="#ff6600"/>
+              <text x="56" y="24" fontFamily="Arial, Helvetica, sans-serif" fontSize="20" fontWeight="900" fill="#ffffff" textAnchor="middle">N</text>
+              <circle cx="94" cy="18" r="16" fill="#ff6600"/>
+              <text x="94" y="24" fontFamily="Arial, Helvetica, sans-serif" fontSize="20" fontWeight="900" fill="#ffffff" textAnchor="middle">T</text>
+            </svg>
+            
           </div>
         </div>
       </div>

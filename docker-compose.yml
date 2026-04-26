@@ -1,7 +1,6 @@
 version: '3.8'
-
 services:
-  # 1. Baza de Date (PostgreSQL + PostGIS)
+  
   db:
     image: postgis/postgis:15-3.3
     volumes:
@@ -13,7 +12,7 @@ services:
     ports:
       - "5432:5432"
 
-  # 2. Interfața Vizuală pentru Baza de Date (NOU)
+  
   pgadmin:
     image: dpage/pgadmin4
     environment:
@@ -24,7 +23,7 @@ services:
     depends_on:
       - db
 
-  # 3. Backend (FastAPI + OR-Tools)
+  
   backend:
     build: ./backend
     volumes:
@@ -39,16 +38,16 @@ services:
     depends_on:
       - db
 
-  # 4. Frontend (Next.js - vom crea fișierele imediat)
+  
   frontend:
     build: ./frontend
     volumes:
       - ./frontend:/app
       - /app/node_modules
     ports:
-      - "3000:3000" # Mapăm portul Vite default
+      - "3000:3000" 
     environment:
-      - WATCHPACK_POLLING=true # Necesar pentru hot-reload pe Windows/Docker
+      - WATCHPACK_POLLING=true 
       - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_cHJvbXB0LW1vY2Nhc2luLTYyLmNsZXJrLmFjY291bnRzLmRldiQ
 
 volumes:

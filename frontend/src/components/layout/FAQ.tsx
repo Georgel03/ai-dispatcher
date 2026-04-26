@@ -1,70 +1,71 @@
-'use client'
+'use client';
 
-import { ChevronUp, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
+import { Icon } from '@iconify/react';
 
-const FAQItem = ({ question, answer, isOpen, onClick }: { question: string, answer?: string, isOpen: boolean, onClick: () => void }) => (
-  <div 
-    className={`bg-white p-6 rounded shadow-sm border border-slate-100 cursor-pointer transition-all ${isOpen ? 'p-8' : ''}`}
-    onClick={onClick}
-  >
-    <div className="flex justify-between items-center">
-      <h3 className="font-bold text-slate-900 text-sm">{question}</h3>
-      {isOpen ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
-    </div>
-    {isOpen && (
-      <p className="mt-4 text-xs text-slate-500 leading-relaxed max-w-3xl animate-in fade-in slide-in-from-top-2">
-        {answer}
-      </p>
-    )}
-  </div>
-);
+const faqs = [
+  {
+    question: "How can Tracker benefit my business?",
+    answer: "It provides real-time visibility into your fleet's location, allowing you to track deliveries, monitor driver behavior, and optimize routes. The platform's analytics provide actionable insights."
+  },
+  {
+    question: "Does Tracker integrate with other systems and devices?",
+    answer: "Yes, our API and webhook systems allow seamless integration with your existing ERP, CRM, or custom internal tools."
+  },
+  {
+    question: "Is my data secure with Tracker?",
+    answer: "Absolutely. We use industry-standard encryption protocols and secure cloud infrastructure to ensure your fleet data is strictly confidential."
+  },
+  {
+    question: "What level of technical support is available?",
+    answer: "We offer 24/7 technical support for our Enterprise tier, and standard business hours support for Basic and Pro users."
+  }
+];
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState(0);
+  
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const questions = [
-    {
-      q: "How can PrecisionTrack benefit my business?",
-      a: "It provides real-time visibility into your fleet's location, allowing you to track deliveries, monitor driver behavior, and optimize routes. The platform's analytics and reporting features enable data-driven decision making, leading to improved operational efficiency, reduced fuel costs, enhanced delivery accuracy, and increased customer satisfaction."
-    },
-    { q: "Does PrecisionTrack integrate with other systems and devices?", a: "Yes, we offer full API integration capabilities." },
-    { q: "Is my data secure with PrecisionTrack?", a: "We use enterprise-grade encryption and security protocols." },
-    { q: "What level of technical support is available?", a: "24/7 dedicated support for all enterprise clients." },
-  ];
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   return (
-    <section className="bg-slate-50 py-32">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          <div>
-            <h2 className="text-3xl font-semibold tracking-tight text-slate-900 mb-2">Got Questions?</h2>
-            <h2 className="text-3xl font-semibold tracking-tight text-slate-900">We've Got Answers</h2>
-          </div>
-          <div className="flex items-end">
-            <p className="text-slate-500 text-xs max-w-sm">
-              Explore our FAQ section today and embark on a journey toward optimized operations, improved efficiency, and increased productivity with PrecisionTrack.
-            </p>
-          </div>
-        </div>
+    <div className="w-full max-w-3xl mx-auto space-y-4">
+      {faqs.map((faq, index) => {
+        const isOpen = openIndex === index;
 
-        <div className="space-y-4">
-          {questions.map((item, idx) => (
-            <FAQItem 
-              key={idx} 
-              question={item.q} 
-              answer={item.a} 
-              isOpen={openIndex === idx} 
-              onClick={() => setOpenIndex(idx === openIndex ? -1 : idx)}
-            />
-          ))}
-        </div>
+        return (
+          <div 
+            key={index} 
+            className="border border-slate-200 rounded-xl bg-white shadow-sm overflow-hidden transition-all duration-300"
+          >
+          
+            <button
+              onClick={() => toggleFAQ(index)}
+              className="w-full flex justify-between items-center p-5 text-left focus:outline-none"
+            >
+              <span className="font-bold text-slate-800 text-lg">
+                {faq.question}
+              </span>
+              <Icon 
+                icon="solar:alt-arrow-down-linear" 
+                className={`text-slate-500 text-2xl transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} 
+              />
+            </button>
 
-        <div className="mt-12 flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-xs text-slate-400">The actual questions and answers would be tailored to the specific features, functionalities, and concerns.</p>
-          <button className="bg-[#5465FF] text-white text-xs font-semibold px-6 py-2.5 rounded-full hover:bg-blue-600 transition">Ask questions</button>
-        </div>
-      </div>
-    </section>
+            <div 
+              className={`transition-all duration-300 ease-in-out ${
+                isOpen ? 'max-h-[500px] opacity-100 pb-5' : 'max-h-0 opacity-0'
+              }`}
+            >
+              <p className="px-5 text-slate-600 leading-relaxed">
+                {faq.answer}
+              </p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
 }

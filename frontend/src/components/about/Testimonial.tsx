@@ -1,22 +1,33 @@
 export default function Testimonial() {
   return (
-    <section className="bg-[#5465FF] py-0 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+    // Fundalul principal este acum alb
+    <section className="bg-white py-16 relative overflow-hidden">
+      <div className="max-w-[1600px] mx-auto border border-slate-100 rounded-3xl overflow-hidden shadow-lg">
         <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="h-[400px] relative">
+          
+          {/* Blocul imaginii */}
+          <div className="h-[500px] md:h-[600px] relative bg-white">
             <img 
-              src="https://images.unsplash.com/photo-1520341280432-4749d4d7bcf9?q=80&w=2070&auto=format&fit=crop" 
-              alt="Man with hat" 
-              className="w-full h-full object-cover object-top opacity-90 mix-blend-overlay"
+              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2074&auto=format&fit=crop" 
+              alt="Logistics Professional" 
+              // Adăugatobject-[center_30%] pentru a forța centrarea pe față
+              className="w-full h-full object-cover object-[center_30%]"
             />
+            {/* Gradientul tranzitează acum spre alb pe margini */}
+            <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-white/70 md:from-transparent to-transparent md:to-white/70 pointer-events-none"></div>
           </div>
-          <div className="flex flex-col justify-center p-12 md:p-20">
-            <blockquote className="text-xl md:text-2xl font-bold text-white leading-snug tracking-tight mb-8">
-              "It's helped me a lot! Amazing feature to track my truck accurately. Keep it seamless and improve new feature."
+          
+          {/* Blocul de testimonial */}
+          <div className="flex flex-col justify-center p-12 md:p-24 bg-blue-700">
+            {/* Actualizat text-white și culori blue-400/opacity-50 pentru quote */}
+            <blockquote className="text-3xl md:text-4xl font-semibold text-white leading-snug tracking-tight mb-12 relative z-10">
+              <span className="text-blue-400/50 text-6xl absolute -top-8 -left-6 opacity-100">"</span>
+              It's helped me a lot! Tracker is an amazing platform to track my trucks accurately. Keep it seamless and keep bringing new features.
             </blockquote>
-            <div>
-              <div className="text-sm font-bold text-white">Nick Johnson</div>
-              <div className="text-[10px] text-indigo-200">CEO of Kingdelivery</div>
+            <div className="relative z-10">
+              <div className="text-xl font-bold text-white mb-1">Nick Johnson</div>
+              
+              <div className="text-sm font-bold text-blue-200 uppercase tracking-widest">Fleet Director at KingDelivery</div>
             </div>
           </div>
         </div>
