@@ -7,7 +7,7 @@ const DynamicMap = dynamic(() => import('./MapPicker'), {
   ssr: false,
   loading: () => (
     <div className="h-64 w-full bg-slate-100 animate-pulse rounded-lg flex items-center justify-center text-slate-400 font-medium border border-slate-200">
-      Se încarcă harta...
+      Loading map...
     </div>
   )
 });

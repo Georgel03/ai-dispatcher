@@ -29,7 +29,7 @@ export default function FleetAssemblyBoard({
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight text-slate-900">Fleet Assembly</h1>
-          <p className="text-sm text-slate-400 mt-1">Selectează un șofer, un cap tractor și o remorcă pentru a forma un echipaj activ.</p>
+          <p className="text-sm text-slate-400 mt-1">Select a driver, a truck, and a trailer to form an active team.</p>
         </div>
         
         {/* Container pentru Căutare + Buton */}
@@ -39,7 +39,7 @@ export default function FleetAssemblyBoard({
             <Icon icon="lucide:search" className="w-4 h-4 text-slate-400 mr-2 shrink-0" />
             <input 
               type="text" 
-              placeholder="Caută resursa..." 
+              placeholder="Search resource..." 
               onChange={(e) => onSearch && onSearch(e.target.value)}
               className="bg-transparent border-none focus:ring-0 text-sm w-full placeholder-slate-400 outline-none text-slate-700 font-medium" 
             />
@@ -53,7 +53,7 @@ export default function FleetAssemblyBoard({
             }`}
           >
             <Icon icon="lucide:link" className="w-4 h-4" />
-            {isReady ? 'Formează Ansamblul' : 'Selectează toate 3'}
+            {isReady ? 'Form Team' : 'Select all 3'}
           </button>
         </div>
       </div>
@@ -64,7 +64,7 @@ export default function FleetAssemblyBoard({
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm flex flex-col overflow-hidden">
           <div className="p-4 border-b border-slate-50 bg-slate-50/50">
             <h3 className="font-medium text-slate-800 flex items-center gap-2">
-              <Icon icon="lucide:user" className="text-indigo-500" /> Șoferi Liberi
+              <Icon icon="lucide:user" className="text-indigo-500" /> Drivers
             </h3>
           </div>
           <div className="p-3 overflow-y-auto flex-1 space-y-2 no-scrollbar">
@@ -79,7 +79,7 @@ export default function FleetAssemblyBoard({
                 <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-600">{driver.name.charAt(0)}</div>
                 <div>
                   <p className="text-sm font-semibold text-slate-900">{driver.name}</p>
-                  <p className="text-xs text-slate-400">Ore conduse azi: {driver.driving_hours || 0}h</p>
+                  <p className="text-xs text-slate-400">Driving hours today: {driver.driving_hours || 0}h</p>
                 </div>
               </div>
             ))}
@@ -90,7 +90,7 @@ export default function FleetAssemblyBoard({
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm flex flex-col overflow-hidden">
           <div className="p-4 border-b border-slate-50 bg-slate-50/50">
             <h3 className="font-medium text-slate-800 flex items-center gap-2">
-              <Icon icon="lucide:truck" className="text-orange-500" /> Capete Tractor
+              <Icon icon="lucide:truck" className="text-orange-500" /> Trucks
             </h3>
           </div>
           <div className="p-3 overflow-y-auto flex-1 space-y-2 no-scrollbar">
@@ -106,7 +106,7 @@ export default function FleetAssemblyBoard({
                   <p className="text-sm font-bold text-slate-900">{truck.plate_number}</p>
                   <p className="text-xs text-slate-500">{truck.model}</p>
                 </div>
-                <span className="text-[10px] bg-slate-100 text-slate-600 px-2 py-1 rounded font-medium">Cap. {truck.own_weight_kg}kg</span>
+                <span className="text-[10px] bg-slate-100 text-slate-600 px-2 py-1 rounded font-medium">Capacity: {truck.own_weight_kg}kg</span>
               </div>
             ))}
           </div>
@@ -116,7 +116,7 @@ export default function FleetAssemblyBoard({
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm flex flex-col overflow-hidden">
           <div className="p-4 border-b border-slate-50 bg-slate-50/50">
             <h3 className="font-medium text-slate-800 flex items-center gap-2">
-              <Icon icon="lucide:container" className="text-emerald-500" /> Remorci Libere
+              <Icon icon="lucide:container" className="text-emerald-500" /> Trailers
             </h3>
           </div>
           <div className="p-3 overflow-y-auto flex-1 space-y-2 no-scrollbar">

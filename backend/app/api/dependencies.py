@@ -82,7 +82,8 @@ def get_clerk_auth(credentials: HTTPAuthorizationCredentials = Depends(security)
         return {
             "clerk_id" : payload.get("sub"),
             "email": payload.get("email"),
-            "profile_picture_url": payload.get("profile_picture_url")
+            "profile_picture_url": payload.get("profile_picture_url"),
+            "role": payload.get("role")
         }
 
     except jwt.PyJWTError as e:

@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.infrastructure.models import Driver, User, Truck, DriverHOS
+from app.infrastructure.models import Driver, DriverStatus, User, Truck, DriverHOS
 from app.domain.schemas import UserCreate, DriverCreate, DriverUpdate
 
 class DriverRepository:
@@ -80,5 +80,25 @@ class DriverRepository:
         self.db.commit()
 
         return clerk_id_to_delete
+    
+    def upsert_driver(self, user_id: int, name: str, phone: str):
+        driver = self.db.query(Driver).filter(Driver.user_id == user_id).first()
+        if driver:
+            driver.name = name
+            driver.phone = phone
+        else:
+            driver = Driver(
+                user_id=user_id,
+                name=name,
+                phone=phone,
+                status=DriverStatus.OFF_DUTY
+            )
+            self.db.add(driver)
+            
+        self.db.commit()
+        if driver:
+            self.db.refresh(driver)
+
+        return driver
 
     

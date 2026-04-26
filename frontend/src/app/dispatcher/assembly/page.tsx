@@ -89,12 +89,12 @@ export default function FleetAssemblyPage() {
             }
         } catch (error) {
             console.error('Error assembling fleet:', error);
-            alert("Eroare de rețea!");
+            alert("Error of assembly!");
         }
     }
 
     const handleDisassemble = async (driverId: number) => {
-      if (!window.confirm("Ești sigur că vrei să dezechipezi acest echipaj?")) return;
+      if (!window.confirm("Are you sure you want to disassemble this fleet?")) return;
 
       try {
         const token = await getToken({ template: 'session_token' });
@@ -106,16 +106,16 @@ export default function FleetAssemblyPage() {
         });
 
         if (res.ok) {
-          alert('Echipaj dezechipat cu succes!');
+          alert('Fleet disassembled successfully!');
           fetchAvailableResources();
           fetchActiveFleets();
         } else {
           const errorData = await res.json();
-          alert(`Eroare la dezechipare: ${errorData.message}`);
+          alert(`Error disassembling fleet: ${errorData.message}`);
         }
       } catch (error) {
         console.error('Error disassembling fleet:', error);
-        alert("Eroare de rețea!");
+        alert("Network error!");
       }
     };
 
@@ -140,7 +140,7 @@ export default function FleetAssemblyPage() {
         <div className="flex-1 overflow-y-auto p-8 pt-10">
           {isLoading ? (
             <div className="flex items-center justify-center h-full text-slate-400 gap-2">
-              <Icon icon="lucide:loader" className="animate-spin w-6 h-6" /> Se încarcă flota disponibilă...
+              <Icon icon="lucide:loader" className="animate-spin w-6 h-6" /> Loading resources...
             </div>
           ) : (
             <>
@@ -157,25 +157,25 @@ export default function FleetAssemblyPage() {
               <div className="mt-12">
                 <h2 className="text-lg font-semibold text-slate-900 mb-4 border-b border-slate-200 pb-2 flex items-center gap-2">
                   <Icon icon="lucide:users" className="text-indigo-500" />
-                  Echipaje Active pe Traseu
+                  Active Fleets
                 </h2>
                 
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
                   <table className="w-full text-left text-sm">
                     <thead className="bg-slate-50 border-b border-slate-100 text-slate-500 font-medium">
                       <tr>
-                        <th className="px-6 py-4">Șofer</th>
-                        <th className="px-6 py-4">Cap Tractor</th>
-                        <th className="px-6 py-4">Remorcă</th>
+                        <th className="px-6 py-4">Driver</th>
+                        <th className="px-6 py-4">Truck</th>
+                        <th className="px-6 py-4">Trailer</th>
                         <th className="px-6 py-4">Status</th>
-                        <th className="px-6 py-4 text-right">Acțiuni</th>
+                        <th className="px-6 py-4 text-right">Actions</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100">
                       {activeFleets?.length === 0 ? (
                         <tr>
                           <td colSpan={5} className="px-6 py-8 text-center text-slate-400">
-                            Niciun echipaj activ. Formează unul mai sus!
+                            No active fleets. Create one above!
                           </td>
                         </tr>
                       ) : (
@@ -200,14 +200,14 @@ export default function FleetAssemblyPage() {
                                 onClick={() => { setFleetToEdit(fleet); setIsEditModalOpen(true); }}
                                 className="text-indigo-600 hover:text-indigo-800 font-medium text-xs flex items-center gap-1 transition-colors"
                               >
-                                <Icon icon="lucide:edit-3" className="w-4 h-4" /> Modifica
+                                <Icon icon="lucide:edit-3" className="w-4 h-4" /> Modify
                               </button>
                               
                               <button 
                                 onClick={() => handleDisassemble(fleet.driver_id)}
                                 className="text-rose-500 hover:text-rose-700 font-medium text-xs flex items-center gap-1 transition-colors"
                               >
-                                <Icon icon="lucide:trash-2" className="w-4 h-4" /> Desfiinteaza
+                                <Icon icon="lucide:trash-2" className="w-4 h-4" /> Disassemble
                               </button>
                             </div>
                             </td>

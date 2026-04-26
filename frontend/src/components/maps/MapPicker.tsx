@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
 // Fix pentru iconița de marker (Next.js pierde uneori calea către imaginile default din Leaflet)

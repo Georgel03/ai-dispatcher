@@ -30,3 +30,13 @@ class UserRepository:
         self.db.commit()
         self.db.refresh(user)
         return user
+    
+    def update_user_onboarding(self, clerk_id: str, role: str, username: str = None):
+        user = self.get_by_clerk_id(clerk_id)
+        if user:
+            user.role = role
+            if username:
+                user.username = username
+            self.db.commit()
+            self.db.refresh(user)
+        return user

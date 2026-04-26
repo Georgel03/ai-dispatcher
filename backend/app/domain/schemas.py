@@ -4,30 +4,29 @@ from typing import Optional
 from app.infrastructure.models import TrailerType, TruckStatus, OrderStatus, DriverStatus
 from datetime import datetime
 
-
+class RoleEnum(str, Enum):
+    PENDING = "pending"
+    DISPATCHER = "dispatcher"
+    DRIVER = "driver"
+    ADMIN = "admin"
 
 class UserCreate(BaseModel):
     clerk_id: str
     email: str
     username: Optional[str] = None
     profile_picture_url: Optional[str] = None
-    role: str = "driver"
+    role: Optional[RoleEnum] = RoleEnum.PENDING
 
 class UserResponse(UserCreate):
     id: int
     clerk_id: str
     email: str
     username: Optional[str] = None
-    role: str
+    profile_picture_url: Optional[str] = None
+    role: Optional[RoleEnum] = None
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)
 
-
-class RoleEnum(str, Enum):
-    DISPATCHER = "dispatcher"
-    DRIVER = "driver"
-    ADMIN = "admin"
 
 class UserUpdate(BaseModel):
     role: RoleEnum
@@ -57,9 +56,9 @@ class TruckCreate(BaseModel):
     status: Optional[TruckStatus] = TruckStatus.AVAILABLE
     location: Optional[LocationInput] = None
 
-    # Acestea vor fi optionale la inceput, le putem atasa ulterior din UI
-    driver_id: Optional[int] = None  # Poate fi asignat direct la creare
-    trailer_id: Optional[int] = None  # Pentru viitoare extensii (remorci)
+   
+    driver_id: Optional[int] = None  
+    trailer_id: Optional[int] = None  
 
 
 class TruckResponse(BaseModel):
@@ -69,7 +68,7 @@ class TruckResponse(BaseModel):
     own_weight_kg: int
     status: TruckStatus
 
-    # Pentru moment returnam doar id-urile asociate (putem adauga nested objects mai tarziu daca e nevoie)
+    
     driver_id: Optional[int] = None
     trailer_id: Optional[int] = None
 

@@ -48,7 +48,7 @@ class Driver(Base):
 
     name = Column(String, index=True)
     phone = Column(String)
-    status = Column(Enum(DriverStatus), default=DriverStatus.OFF_DUTY)
+    status = Column(Enum(DriverStatus), default=DriverStatus.OFF_DUTY, nullable=False)
 
     user_id = Column(Integer, ForeignKey("users.id"), unique=True)  # Fiecare șofer are un cont de utilizator asociat
     user = relationship("User")

@@ -53,7 +53,7 @@ export default function EditFleetModal({ isOpen, onClose, fleet, availableResour
         <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
           <h3 className="font-bold text-slate-900 flex items-center gap-2">
             <Icon icon="lucide:settings-2" className="text-indigo-600" width="20" />
-            Modifică Echipajul
+            Edit Fleet
           </h3>
           <button onClick={onClose} className="text-slate-400 hover:text-slate-700 transition-colors">
             <Icon icon="lucide:x-circle" width="24" />
@@ -67,19 +67,19 @@ export default function EditFleetModal({ isOpen, onClose, fleet, availableResour
                {fleet.driver_name.charAt(0)}
              </div>
              <div>
-               <p className="text-xs text-indigo-400 font-semibold uppercase">Șofer Titular</p>
+               <p className="text-xs text-indigo-400 font-semibold uppercase">Driver</p>
                <p className="text-sm font-bold text-indigo-900">{fleet.driver_name}</p>
              </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-2">Schimbă Capul Tractor</label>
+            <label className="block text-xs font-semibold text-slate-700 mb-2">Change Truck</label>
             <select 
               value={selectedTruck} 
               onChange={e => setSelectedTruck(e.target.value)} 
               className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-indigo-500 bg-white"
             >
-              <option value={fleet.truck_id}>-- Curent: {fleet.truck_plate} --</option>
+              <option value={fleet.truck_id}>-- Current: {fleet.truck_plate} --</option>
               {availableResources.trucks.map((t: any) => (
                 <option key={t.id} value={t.id}>{t.plate_number} ({t.model})</option>
               ))}
@@ -87,30 +87,30 @@ export default function EditFleetModal({ isOpen, onClose, fleet, availableResour
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-2">Schimbă Remorca</label>
+            <label className="block text-xs font-semibold text-slate-700 mb-2">Change Trailer</label>
             <select 
               value={selectedTrailer} 
               onChange={e => setSelectedTrailer(e.target.value)} 
               className="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm outline-none focus:border-indigo-500 bg-white"
             >
               {fleet.trailer_id ? (
-                 <option value={fleet.trailer_id}>-- Curent: {fleet.trailer_plate} --</option>
+                 <option value={fleet.trailer_id}>-- Current: {fleet.trailer_plate} --</option>
               ) : (
-                 <option value="">-- Fără remorcă în prezent --</option>
+                 <option value="">-- No trailer currently assigned --</option>
               )}
               {availableResources.trailers.map((t: any) => (
                 <option key={t.id} value={t.id}>{t.plate_number} (Max: {t.capacity_kg}kg)</option>
               ))}
-              <option value="">Decuplează remorca (Fără)</option>
+              <option value="">Uncouple the trailer</option>
             </select>
           </div>
         </div>
 
         <div className="p-4 border-t border-slate-100 bg-slate-50 flex justify-end gap-3">
-          <button onClick={onClose} className="px-5 py-2 bg-white border border-slate-200 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-50">Anulează</button>
+          <button onClick={onClose} className="px-5 py-2 bg-white border border-slate-200 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-50">Cancel</button>
           <button onClick={handleSubmit} disabled={isLoading} className="px-5 py-2 bg-indigo-600 text-white rounded-lg text-sm font-semibold hover:bg-indigo-700 flex items-center gap-2">
             {isLoading ? <Icon icon="lucide:loader" className="animate-spin" /> : <Icon icon="lucide:save" />}
-            Salvează Modificările
+            Save Changes
           </button>
         </div>
       </div>

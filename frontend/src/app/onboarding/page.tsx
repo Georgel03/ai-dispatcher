@@ -29,7 +29,6 @@ export default function OnboardingPage() {
     try {
       const token = await getToken( { template: "session_token" } );
 
-      // Payload-ul respectă DTO-ul "OnboardingRequest" de pe backend
       const payload = {
         role: role,
         full_name: name,
@@ -50,6 +49,10 @@ export default function OnboardingPage() {
         throw new Error(error.detail || 'Failed to onboard');
       }
 
+      await clerkUser?.reload(); 
+      
+      await getToken({ template: "session_token", skipCache: true });
+
       // Succes! Redirecționăm către dashboard-ul principal
       window.location.href = "/";
       
@@ -67,8 +70,8 @@ export default function OnboardingPage() {
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 text-black">
         
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-slate-900">Bun venit, {clerkUser.firstName}!</h1>
-          <p className="text-slate-500">Alege rolul tău în platformă.</p>
+          <h1 className="text-2xl font-bold text-slate-900">Welcome, {clerkUser.firstName}!</h1>
+          <p className="text-slate-500">Choose your role in the platform.</p>
         </div>
 
         {step === "role_selection" && (
@@ -78,8 +81,8 @@ export default function OnboardingPage() {
               className="w-full p-4 border-2 border-slate-200 rounded-lg hover:border-blue-600 hover:bg-blue-50 transition flex items-center justify-between group"
             >
               <div className="text-left text-black">
-                <span className="block font-bold group-hover:text-blue-700">Șofer de Tir</span>
-                <span className="text-sm text-slate-500">Transport marfă și gestionare vehicul.</span>
+                <span className="block font-bold group-hover:text-blue-700">Driver</span>
+                <span className="text-sm text-slate-500">Transport cargo</span>
               </div>
               <span className="text-3xl">🚛</span>
             </button>
@@ -89,8 +92,8 @@ export default function OnboardingPage() {
               className="w-full p-4 border-2 border-slate-200 rounded-lg hover:border-purple-600 hover:bg-purple-50 transition flex items-center justify-between group"
             >
               <div className="text-left text-black">
-                <span className="block font-bold group-hover:text-purple-700">Dispecer</span>
-                <span className="text-sm text-slate-500">Asignare curse și management flotă.</span>
+                <span className="block font-bold group-hover:text-purple-700">Dispatcher</span>
+                <span className="text-sm text-slate-500">Assign orders and manage fleet.</span>
               </div>
               <span className="text-3xl">🖥️</span>
             </button>
@@ -99,10 +102,10 @@ export default function OnboardingPage() {
 
         {step === "driver_details" && (
           <div className="space-y-5">
-            <h2 className="text-lg font-bold text-center text-slate-900">Detalii Șofer</h2>
+            <h2 className="text-lg font-bold text-center text-slate-900">Driver Details</h2>
             
             <div>
-              <label className="block text-sm font-bold text-slate-800 mb-1">Nume Complet</label>
+              <label className="block text-sm font-bold text-slate-800 mb-1">Full Name</label>
               <input 
                 type="text" 
                 className="w-full p-3 border-2 border-slate-300 rounded-md outline-none text-black font-semibold"
@@ -112,7 +115,7 @@ export default function OnboardingPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-slate-800 mb-1">Telefon</label>
+              <label className="block text-sm font-bold text-slate-800 mb-1">Phone</label>
               <input 
                 type="tel" 
                 className="w-full p-3 border-2 border-slate-300 rounded-md outline-none text-black font-semibold"
@@ -122,13 +125,13 @@ export default function OnboardingPage() {
             </div>
 
             <div className="pt-4 flex gap-3">
-              <button onClick={() => setStep("role_selection")} className="flex-1 font-semibold text-slate-600">Înapoi</button>
+              <button onClick={() => setStep("role_selection")} className="flex-1 font-semibold text-slate-600">Back</button>
               <button 
                 onClick={() => submitOnboarding("driver", formData.fullName, formData.phone)}
                 disabled={isLoading || !formData.fullName || !formData.phone}
                 className="flex-1 py-3 bg-blue-600 text-white font-bold rounded-lg disabled:opacity-50"
               >
-                {isLoading ? "Se salvează..." : "Finalizează"}
+                {isLoading ? "Saving..." : "Finalize Onboarding"}
               </button>
             </div>
           </div>

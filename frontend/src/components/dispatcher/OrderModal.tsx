@@ -72,7 +72,7 @@ export default function OrderModal({ isOpen, onClose, onSuccess, orderToEdit }: 
         onClose();
       } else {
         const errData = await res.json();
-        alert(`Eroare: ${errData.detail || 'Nu s-a putut salva comanda.'}`);
+        alert(`Error: ${errData.detail || 'Could not save order.'}`);
       }
     } catch (error) {
       console.error(error);
@@ -86,7 +86,7 @@ export default function OrderModal({ isOpen, onClose, onSuccess, orderToEdit }: 
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
         <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
           <h2 className="text-lg font-bold text-slate-800">
-            {orderToEdit ? 'Editează Comanda' : 'Adaugă Comandă Nouă'}
+            {orderToEdit ? 'Edit Order' : 'Add New Order'}
           </h2>
           <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
             <Icon icon="solar:close-circle-linear" width="24" />
@@ -98,23 +98,23 @@ export default function OrderModal({ isOpen, onClose, onSuccess, orderToEdit }: 
             
             {/* Detalii de bază */}
             <div className="space-y-4">
-              <h3 className="text-xs font-bold text-indigo-600 uppercase tracking-wider border-b border-indigo-100 pb-2">Detalii Marfă</h3>
+              <h3 className="text-xs font-bold text-indigo-600 uppercase tracking-wider border-b border-indigo-100 pb-2">Cargo Details</h3>
               <div>
-                <label className="block text-xs font-semibold text-slate-600 mb-1">Descriere Marfă</label>
+                <label className="block text-xs font-semibold text-slate-600 mb-1">Cargo Description</label>
                 <input required type="text" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-indigo-500 transition-colors" placeholder="Ex: 20 Paleți Apă Minerală" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-600 mb-1">Greutate (kg)</label>
+                  <label className="block text-xs font-semibold text-slate-600 mb-1">Weight (kg)</label>
                   <input required type="number" value={formData.weight_kg} onChange={e => setFormData({...formData, weight_kg: Number(e.target.value)})} className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-indigo-500 transition-colors" />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-600 mb-1">Tip Remorcă Necesar</label>
+                  <label className="block text-xs font-semibold text-slate-600 mb-1">Required Trailer Type</label>
                   <select value={formData.required_trailer_type} onChange={e => setFormData({...formData, required_trailer_type: e.target.value})} className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-indigo-500 transition-colors">
-                    <option value="prelata">Prelată (General)</option>
-                    <option value="frigorific">Frigorific (Temp. controlată)</option>
-                    <option value="cisterna">Cisternă (Lichide)</option>
-                    <option value="platforma">Platformă (Agabaritic)</option>
+                    <option value="prelata">Prelata</option>
+                    <option value="frigorific">Frigorific</option>
+                    <option value="cisterna">Cisterna</option>
+                    <option value="platforma">Platforma</option>
                   </select>
                 </div>
               </div>
@@ -122,20 +122,20 @@ export default function OrderModal({ isOpen, onClose, onSuccess, orderToEdit }: 
 
             {/* Locații (Coordonate) */}
             <div className="space-y-4">
-              <h3 className="text-xs font-bold text-rose-600 uppercase tracking-wider border-b border-rose-100 pb-2">Traseu (Coordonate GPS)</h3>
+              <h3 className="text-xs font-bold text-rose-600 uppercase tracking-wider border-b border-rose-100 pb-2">Locations (GPS Coordinates)</h3>
               <div className="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100">
                 <div>
-                  <p className="text-xs font-bold text-slate-800 mb-2 flex items-center gap-1"><Icon icon="solar:map-point-bold" className="text-indigo-500" /> Punct Încărcare (Pickup)</p>
-                  <label className="block text-[10px] text-slate-500">Latitudine</label>
+                  <p className="text-xs font-bold text-slate-800 mb-2 flex items-center gap-1"><Icon icon="solar:map-point-bold" className="text-indigo-500" /> Pickup</p>
+                  <label className="block text-[10px] text-slate-500">Latitude</label>
                   <input type="number" step="any" required value={formData.pickup_lat} onChange={e => setFormData({...formData, pickup_lat: parseFloat(e.target.value)})} className="w-full px-3 py-1.5 mb-2 border rounded-lg text-xs" />
-                  <label className="block text-[10px] text-slate-500">Longitudine</label>
+                  <label className="block text-[10px] text-slate-500">Longitude</label>
                   <input type="number" step="any" required value={formData.pickup_lng} onChange={e => setFormData({...formData, pickup_lng: parseFloat(e.target.value)})} className="w-full px-3 py-1.5 border rounded-lg text-xs" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-slate-800 mb-2 flex items-center gap-1"><Icon icon="solar:map-point-bold" className="text-emerald-500" /> Punct Descărcare (Delivery)</p>
-                  <label className="block text-[10px] text-slate-500">Latitudine</label>
+                  <p className="text-xs font-bold text-slate-800 mb-2 flex items-center gap-1"><Icon icon="solar:map-point-bold" className="text-emerald-500" /> Delivery</p>
+                  <label className="block text-[10px] text-slate-500">Latitude</label>
                   <input type="number" step="any" required value={formData.delivery_lat} onChange={e => setFormData({...formData, delivery_lat: parseFloat(e.target.value)})} className="w-full px-3 py-1.5 mb-2 border rounded-lg text-xs" />
-                  <label className="block text-[10px] text-slate-500">Longitudine</label>
+                  <label className="block text-[10px] text-slate-500">Longitude</label>
                   <input type="number" step="any" required value={formData.delivery_lng} onChange={e => setFormData({...formData, delivery_lng: parseFloat(e.target.value)})} className="w-full px-3 py-1.5 border rounded-lg text-xs" />
                 </div>
               </div>
@@ -143,14 +143,14 @@ export default function OrderModal({ isOpen, onClose, onSuccess, orderToEdit }: 
 
             {/* Deadlines */}
             <div className="space-y-4">
-              <h3 className="text-xs font-bold text-amber-600 uppercase tracking-wider border-b border-amber-100 pb-2">Termene Limită (Deadlines)</h3>
+              <h3 className="text-xs font-bold text-amber-600 uppercase tracking-wider border-b border-amber-100 pb-2">Deadlines</h3>
               <div className="grid grid-cols-2 gap-4">
                  <div>
-                  <label className="block text-xs font-semibold text-slate-600 mb-1">Deadline Încărcare</label>
+                  <label className="block text-xs font-semibold text-slate-600 mb-1">Deadline Pick-up</label>
                   <input type="datetime-local" value={formData.pickup_deadline} onChange={e => setFormData({...formData, pickup_deadline: e.target.value})} className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-indigo-500" />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-600 mb-1">Deadline Descărcare</label>
+                  <label className="block text-xs font-semibold text-slate-600 mb-1">Deadline Delivery</label>
                   <input type="datetime-local" value={formData.delivery_deadline} onChange={e => setFormData({...formData, delivery_deadline: e.target.value})} className="w-full px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:border-indigo-500" />
                 </div>
               </div>
@@ -160,10 +160,10 @@ export default function OrderModal({ isOpen, onClose, onSuccess, orderToEdit }: 
         </div>
 
         <div className="p-4 border-t border-slate-100 bg-slate-50/50 flex justify-end gap-3">
-          <button onClick={onClose} className="px-6 py-2 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-200 transition-colors">Anulează</button>
+          <button onClick={onClose} className="px-6 py-2 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-200 transition-colors">Cancel</button>
           <button form="orderForm" type="submit" disabled={isLoading} className="px-6 py-2 rounded-xl text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors disabled:opacity-50 flex items-center gap-2">
             {isLoading && <Icon icon="lucide:loader" className="animate-spin" />}
-            {orderToEdit ? 'Salvează Modificările' : 'Creează Comanda'}
+            {orderToEdit ? 'Save Changes' : 'Create Order'}
           </button>
         </div>
       </div>

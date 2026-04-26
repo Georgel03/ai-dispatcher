@@ -72,7 +72,7 @@ export default function AssignOrderModal({ isOpen, onClose, onSuccess, orderToAs
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden flex flex-col max-h-[90vh]">
         <div className="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
           <div>
-            <h2 className="text-lg font-bold text-slate-800">Alocă Echipaj</h2>
+            <h2 className="text-lg font-bold text-slate-800">Assign Team</h2>
             <p className="text-xs text-slate-500 mt-0.5">{orderToAssign.description}</p>
           </div>
           <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
@@ -81,17 +81,17 @@ export default function AssignOrderModal({ isOpen, onClose, onSuccess, orderToAs
         </div>
 
         <div className="p-6 overflow-y-auto bg-slate-50/30">
-          <h3 className="text-xs font-bold text-indigo-600 uppercase tracking-wider mb-4">Alege un echipaj disponibil</h3>
+          <h3 className="text-xs font-bold text-indigo-600 uppercase tracking-wider mb-4">Choose an available team</h3>
           
           {isLoading ? (
             <div className="flex items-center justify-center py-10 text-slate-400 gap-2">
-              <Icon icon="lucide:loader" className="animate-spin" /> Se caută echipaje...
+              <Icon icon="lucide:loader" className="animate-spin" /> Searching for teams...
             </div>
           ) : fleets.length === 0 ? (
             <div className="text-center py-10 bg-white border border-slate-200 border-dashed rounded-xl">
               <Icon icon="solar:danger-circle-bold-duotone" width="32" className="text-amber-400 mx-auto mb-2" />
-              <p className="text-sm font-bold text-slate-700">Niciun echipaj disponibil!</p>
-              <p className="text-xs text-slate-500 mt-1">Toate camioanele sunt în tranzit sau în mentenanță.</p>
+              <p className="text-sm font-bold text-slate-700">No available teams!</p>
+              <p className="text-xs text-slate-500 mt-1">All trucks are in transit or under maintenance.</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -125,14 +125,14 @@ export default function AssignOrderModal({ isOpen, onClose, onSuccess, orderToAs
         </div>
 
         <div className="p-4 border-t border-slate-100 bg-white flex justify-end gap-3">
-          <button onClick={onClose} className="px-6 py-2 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-100 transition-colors">Anulează</button>
+          <button onClick={onClose} className="px-6 py-2 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-100 transition-colors">Cancel</button>
           <button 
             onClick={handleAssign} 
             disabled={!selectedTruckId || isSubmitting} 
             className="px-6 py-2 rounded-xl text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors disabled:opacity-50 flex items-center gap-2"
           >
             {isSubmitting && <Icon icon="lucide:loader" className="animate-spin" />}
-            Asignează și Generează Ruta
+            Assign and Generate Route
           </button>
         </div>
       </div>
